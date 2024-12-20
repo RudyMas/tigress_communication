@@ -1,0 +1,27 @@
+{
+  "name": "tigress/communication",
+  "description": "Tigress communication library",
+  "type": "library",
+  "license": "GPL-3.0-or-later",
+  "authors": [
+    {
+      "name": "Rudy Mas",
+      "email": "rudy.mas@rudymas.be",
+      "homepage": "https://rudymas.be",
+      "role": "Developer"
+    }
+  ],
+  "minimum-stability": "stable",
+  "require": {
+    "php": ">=8.4",
+    "phpmailer/phpmailer": ">=v6.9"
+  },
+  "require-dev": {
+    "tigress/core": "dev-main"
+  },
+  "autoload": {
+    "psr-4": {
+      "Tigress\\": "src/"
+    }
+  }
+}
