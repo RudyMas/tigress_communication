@@ -21,7 +21,7 @@ class Communication
     public static function version(): array
     {
         return [
-            'Communicator' => '2024.12.20',
+            'Communication' => '2024.12.20',
             'Email' => Email::version(),
         ];
     }
