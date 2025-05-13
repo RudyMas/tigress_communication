@@ -14,7 +14,7 @@ use Psr\Log\LoggerInterface;
  * @author       Rudy Mas <rudy.mas@rudymas.be>
  * @copyright    2025, Rudy Mas (http://rudymas.be/)
  * @license      https://opensource.org/licenses/GPL-3.0 GNU General Public License, version 3 (GPL-3.0)
- * @version      2025.05.13.4
+ * @version      2025.05.13.5
  * @package      Tigress
  */
 class Smartschool
@@ -96,6 +96,7 @@ class Smartschool
      * @param array|null $attachments
      * @param string|null $redirectByError
      * @param bool $debug
+     * @param string $errorMsg
      * @return void
      * @throws Exception
      */
@@ -106,12 +107,13 @@ class Smartschool
         int $coAccount,
         ?array $attachments = null,
         ?string $redirectByError = '/',
-        bool $debug = false
+        bool $debug = false,
+        string $errorMsg = 'An error occurred while sending the message. However, the action was still completed.'
     ): void {
         if ($debug) {
             $this->sendTestMail($subject, $body, $attachments, $redirectByError);
         } else {
-            $this->sendMailToSmartSchool($recipient, $subject, $body, $attachments, $coAccount, $redirectByError);
+            $this->sendMailToSmartSchool($recipient, $subject, $body, $attachments, $coAccount, $redirectByError, $errorMsg);
         }
     }
 
@@ -150,7 +152,7 @@ class Smartschool
      * @return void
      * @throws Exception
      */
-    private function sendMailToSmartSchool(string $recipient, string $subject, string $body, ?array $attachments, int $coAccount, ?string $redirectByError, string $errorMsg = 'An error occurred while sending the message. However, the action was still completed.'): void
+    private function sendMailToSmartSchool(string $recipient, string $subject, string $body, ?array $attachments, int $coAccount, ?string $redirectByError, string $errorMsg): void
     {
         try {
             $result = $this->soap->sendMsg(
