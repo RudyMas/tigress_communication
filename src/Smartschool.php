@@ -19,9 +19,9 @@ use Psr\Log\LoggerInterface;
  */
 class Smartschool
 {
-    private SoapClient $soap;
-    private string $passwordWebServices = '';
     private ?LoggerInterface $logger;
+    private string $passwordWebServices = '';
+    private SoapClient $soap;
     private array $testUser = [
         'platform' => '',
         'webservicespwd' => '',
