@@ -14,7 +14,7 @@ use Psr\Log\LoggerInterface;
  * @author       Rudy Mas <rudy.mas@rudymas.be>
  * @copyright    2025, Rudy Mas (http://rudymas.be/)
  * @license      https://opensource.org/licenses/GPL-3.0 GNU General Public License, version 3 (GPL-3.0)
- * @version      2025.05.13.3
+ * @version      2025.05.13.4
  * @package      Tigress
  */
 class Smartschool
@@ -55,10 +55,10 @@ class Smartschool
         if (isset(CONFIG->smartschool)) {
             $smartschool = CONFIG->smartschool;
             $this->testUser = [
-                'platform' => $smartschool->platform ?? '',
-                'webservicespwd' => $smartschool->webservicespwd ?? '',
-                'username' => $smartschool->username ?? '',
-                'nrCoAccount' => $smartschool->nrCoAccount ?? 0
+                'platform' => $smartschool->testUser->platform ?? '',
+                'webservicespwd' => $smartschool->testUser->webservicespwd ?? '',
+                'username' => $smartschool->testUser->username ?? '',
+                'nrCoAccount' => $smartschool->testUser->nrCoAccount ?? 0
             ];
         }
 
@@ -207,8 +207,7 @@ class Smartschool
         if (
             empty($this->testUser['platform']) ||
             empty($this->testUser['webservicespwd']) ||
-            empty($this->testUser['username']) ||
-            empty($this->testUser['nrCoAccount'])
+            empty($this->testUser['username'])
         ) {
             throw new Exception('Test user information is incomplete. Please configure it using setTestUser().');
         }
