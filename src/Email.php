@@ -9,9 +9,9 @@ use PHPMailer\PHPMailer\PHPMailer;
  * Class Email (PHP version 8.4)
  *
  * @author       Rudy Mas <rudy.mas@rudymas.be>
- * @copyright    2024, Rudy Mas (http://rudymas.be/)
+ * @copyright    2024-2025, Rudy Mas (http://rudymas.be/)
  * @license      https://opensource.org/licenses/GPL-3.0 GNU General Public License, version 3 (GPL-3.0)
- * @version      2024.12.20.0
+ * @version      2025.05.19.0
  * @package      Tigress
  */
 class Email
@@ -25,7 +25,7 @@ class Email
      */
     public static function version(): string
     {
-        return '2024.12.20';
+        return '2025.05.19';
     }
 
     public function __construct($exceptions = null)
@@ -106,7 +106,7 @@ class Email
         string $subject,
         string $body,
         bool   $test = false,
-        array  $testTo = ['email' => 'rudy.mas@go-next.be', 'name' => 'Rudy Mas'],
+        array  $testTo = ['email' => 'rudy.mas@rudymas.be', 'name' => 'Rudy Mas'],
         bool   $isHtml = true,
         array  $cc = [],
         array  $bcc = []
