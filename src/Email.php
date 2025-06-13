@@ -11,7 +11,7 @@ use PHPMailer\PHPMailer\PHPMailer;
  * @author       Rudy Mas <rudy.mas@rudymas.be>
  * @copyright    2024-2025, Rudy Mas (http://rudymas.be/)
  * @license      https://opensource.org/licenses/GPL-3.0 GNU General Public License, version 3 (GPL-3.0)
- * @version      2025.05.19.0
+ * @version      2025.06.13.0
  * @package      Tigress
  */
 class Email
@@ -25,7 +25,7 @@ class Email
      */
     public static function version(): string
     {
-        return '2025.05.19';
+        return '2025.06.13';
     }
 
     public function __construct($exceptions = null)
@@ -178,5 +178,57 @@ class Email
 
         $file = $path . $name;
         $this->mail->addEmbeddedImage($file, $cid, $name, $encoding, $type, $disposition);
+    }
+
+    /**
+     * Add an ICS file to the email
+     * This method creates an ICS calendar event and attaches it to the email.
+     * The ICS data should be provided in an associative array format with the following keys:
+     * - uid: Unique identifier for the event
+     * - sequence: Sequence number for the event (used for updates)
+     * - dtstart: Start date and time of the event in 'YYYYMMDDTHHMMSS' format
+     * - dtend: End date and time of the event in 'YYYYMMDDTHHMMSS' format
+     * - summary: Summary or title of the event
+     * - location: Location of the event
+     * - description: Description of the event
+     * - cn_organizer: Name of the organizer
+     * - email_organizer: Email address of the organizer
+     * - cn_attendee: Name of the attendee
+     * - email_attendee: Email address of the attendee
+     *
+     * @param array $icsData
+     * @param string $filename
+     * @return void
+     * @throws Exception
+     */
+    public function addIcs(
+        array $icsData,
+        string $filename = 'event.ics',
+    ): void
+    {
+        $dtstamp = gmdate('Ymd\THis\Z');
+
+        $icsString = <<<ICS
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Guna Agenda//EN
+METHOD:REQUEST
+CALSCALE:GREGORIAN
+BEGIN:VEVENT
+UID:{$icsData['uid']}
+SEQUENCE:{$icsData['sequence']}
+DTSTAMP:{$dtstamp}
+DTSTART;TZID=Europe/Brussels:{$icsData['dtstart']}
+DTEND;TZID=Europe/Brussels:{$icsData['dtend']}
+SUMMARY:{$icsData['summary']}
+LOCATION:{$icsData['location']}
+DESCRIPTION:{$icsData['description']}
+ORGANIZER;CN={$icsData['cn_organizer']}:MAILTO:{$icsData['email_organizer']}
+ATTENDEE;CN={$icsData['cn_attendee']};RSVP=TRUE:MAILTO:{$icsData['email_attendee']}
+END:VEVENT
+END:VCALENDAR
+ICS;
+
+        $this->mail->addStringAttachment($icsString, $filename, 'base64', 'text/calendar; method=REQUEST; charset=UTF-8');
     }
 }
