@@ -11,7 +11,7 @@ use PHPMailer\PHPMailer\PHPMailer;
  * @author       Rudy Mas <rudy.mas@rudymas.be>
  * @copyright    2024-2025, Rudy Mas (http://rudymas.be/)
  * @license      https://opensource.org/licenses/GPL-3.0 GNU General Public License, version 3 (GPL-3.0)
- * @version      2025.06.13.0
+ * @version      2025.06.13.1
  * @package      Tigress
  */
 class Email
@@ -206,7 +206,27 @@ class Email
         string $filename = 'event.ics',
     ): void
     {
-        $dtstamp = gmdate('Ymd\THis\Z');
+        $icsDataDefaults = [
+            'uid' => uniqid() . '@' . $_SERVER['SERVER_NAME'],
+            'sequence' => 0,
+            'dtstamp' => gmdate('Ymd\THis\Z'),
+            'dtstart' => gmdate('Ymd\THis', strtotime('+1 hour')),
+            'dtend' => gmdate('Ymd\THis', strtotime('+2 hour')),
+            'summary' => 'Event',
+            'location' => '',
+            'description' => '',
+            'cn_organizer' => '',
+            'email_organizer' => '',
+            'cn_attendee' => '',
+            'email_attendee' => '',
+        ];
+
+        $icsData['description'] = $this->escapeIcsText($icsData['description']);
+        $icsData['summary'] = $this->escapeIcsText($icsData['summary']);
+        $icsData['location'] = $this->escapeIcsText($icsData['location']);
+
+        // Merge provided ICS data with defaults
+        $icsData = array_merge($icsDataDefaults, $icsData);
 
         $icsString = <<<ICS
 BEGIN:VCALENDAR
@@ -217,7 +237,7 @@ CALSCALE:GREGORIAN
 BEGIN:VEVENT
 UID:{$icsData['uid']}
 SEQUENCE:{$icsData['sequence']}
-DTSTAMP:{$dtstamp}
+DTSTAMP:{$icsData['dtstamp']}
 DTSTART;TZID=Europe/Brussels:{$icsData['dtstart']}
 DTEND;TZID=Europe/Brussels:{$icsData['dtend']}
 SUMMARY:{$icsData['summary']}
@@ -230,5 +250,29 @@ END:VCALENDAR
 ICS;
 
         $this->mail->addStringAttachment($icsString, $filename, 'base64', 'text/calendar; method=REQUEST; charset=UTF-8');
+    }
+
+    /**
+     * Escape text for ICS format
+     * This method escapes special characters in the text to ensure it is compliant with the ICS format.
+     * It replaces the following characters:
+     * - Backslash (\) with double backslash (\\\\)
+     * - Comma (,) with escaped comma (\\,)
+     * - Semicolon (;) with escaped semicolon (\\;)
+     * - Colon (:) with escaped colon (\\:)
+     * - Newline (\n) with escaped newline (\\n)
+     * - Carriage return (\r) with escaped carriage return (\\r)
+     *
+     * @param string $text
+     * @return string
+     */
+    private function escapeIcsText(string $text): string
+    {
+        // Escape special characters for ICS format
+        return str_replace(
+            ['\\', ',', ';', ':', '\n', '\r'],
+            ['\\\\', '\\,', '\\;', '\\:', '\\n', '\\r'],
+            $text
+        );
     }
 }
