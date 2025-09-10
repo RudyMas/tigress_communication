@@ -15,6 +15,7 @@
   "require": {
     "php": ">=8.4",
     "ext-soap": "*",
+    "guzzlehttp/guzzle": ">=7",
     "phpmailer/phpmailer": ">=v6.9"
   },
   "require-dev": {

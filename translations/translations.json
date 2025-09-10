@@ -1,0 +1,62 @@
+{
+  "nl": {
+    "Add question": "Toevoegen vraag",
+    "An error occurred while sending the message. However, the action was still completed.": "Er is een fout opgetreden bij het verzenden van het bericht. De actie is echter wel voltooid.",
+    "cannot be empty.": "mag niet leeg zijn.",
+    "Failed to obtain access token from Microsoft Graph.": "Het is niet gelukt om een toegangstoken van Microsoft Graph te verkrijgen.",
+    "Mail sent successfully": "Mail succesvol verzonden",
+    "SOAP connection with Smartschool failed.": "SOAP-verbinding met Smartschool is mislukt.",
+    "Test user information is incomplete. Please configure it using setTestUser().": "Testgebruikersinformatie is onvolledig. Stel deze in met setTestUser().",
+    "To view the message, please use an HTML compatible email viewer!": "Om het bericht te bekijken, gebruik een HTML-compatibele e-mailviewer!"
+  },
+  "fr": {
+    "Add question": "Ajouter une question",
+    "An error occurred while sending the message. However, the action was still completed.": "Une erreur s'est produite lors de l'envoi du message. Cependant, l'action a tout de même été effectuée.",
+    "cannot be empty.": "ne peut pas être vide.",
+    "Failed to obtain access token from Microsoft Graph.": "Échec de l'obtention du jeton d'accès depuis Microsoft Graph.",
+    "Mail sent successfully": "Mail envoyé avec succès",
+    "SOAP connection with Smartschool failed.": "La connexion SOAP avec Smartschool a échoué.",
+    "Test user information is incomplete. Please configure it using setTestUser().": "Les informations de l'utilisateur de test sont incomplètes. Veuillez les configurer en utilisant setTestUser().",
+    "To view the message, please use an HTML compatible email viewer!": "Pour voir le message, veuillez utiliser un visualiseur de courrier électronique compatible HTML !"
+  },
+  "de": {
+    "Add question": "Frage hinzufügen",
+    "An error occurred while sending the message. However, the action was still completed.": "Beim Senden der Nachricht ist ein Fehler aufgetreten. Die Aktion wurde jedoch trotzdem abgeschlossen.",
+    "cannot be empty.": "darf nicht leer sein.",
+    "Failed to obtain access token from Microsoft Graph.": "Fehler beim Abrufen des Zugriffstokens von Microsoft Graph.",
+    "Mail sent successfully": "Mail erfolgreich gesendet",
+    "SOAP connection with Smartschool failed.": "Die SOAP-Verbindung mit Smartschool ist fehlgeschlagen.",
+    "Test user information is incomplete. Please configure it using setTestUser().": "Die Testbenutzerinformationen sind unvollständig. Bitte konfigurieren Sie diese mit setTestUser().",
+    "To view the message, please use an HTML compatible email viewer!": "Um die Nachricht anzuzeigen, verwenden Sie bitte einen HTML-kompatiblen E-Mail-Viewer!"
+  },
+  "es": {
+    "Add question": "Añadir pregunta",
+    "An error occurred while sending the message. However, the action was still completed.": "Se produjo un error al enviar el mensaje. Sin embargo, la acción se completó de todos modos.",
+    "cannot be empty.": "no puede estar vacío.",
+    "Failed to obtain access token from Microsoft Graph.": "No se pudo obtener el token de acceso de Microsoft Graph.",
+    "Mail sent successfully": "Correo enviado con éxito",
+    "SOAP connection with Smartschool failed.": "La conexión SOAP con Smartschool falló.",
+    "Test user information is incomplete. Please configure it using setTestUser().": "La información del usuario de prueba está incompleta. Por favor, configúrela usando setTestUser().",
+    "To view the message, please use an HTML compatible email viewer!": "¡Para ver el mensaje, utilice un visor de correo electrónico compatible con HTML!"
+  },
+  "it": {
+    "Add question": "Aggiungi domanda",
+    "An error occurred while sending the message. However, the action was still completed.": "Si è verificato un errore durante l'invio del messaggio. Tuttavia, l'azione è stata comunque completata.",
+    "cannot be empty.": "non può essere vuoto.",
+    "Failed to obtain access token from Microsoft Graph.": "Impossibile ottenere il token di accesso da Microsoft Graph.",
+    "Mail sent successfully": "Mail inviata con successo",
+    "SOAP connection with Smartschool failed.": "Connessione SOAP con Smartschool non riuscita.",
+    "Test user information is incomplete. Please configure it using setTestUser().": "Le informazioni sull'utente di test sono incomplete. Configurale utilizzando setTestUser().",
+    "To view the message, please use an HTML compatible email viewer!": "Per visualizzare il messaggio, utilizzare un visualizzatore di posta elettronica compatibile con HTML!"
+  },
+  "sv": {
+    "Add question": "Lägg till fråga",
+    "An error occurred while sending the message. However, the action was still completed.": "Ett fel uppstod vid sändning av meddelandet. Åtgärden slutfördes dock ändå.",
+    "cannot be empty.": "får inte vara tom.",
+    "Failed to obtain access token from Microsoft Graph.": "Det gick inte att hämta åtkomsttoken från Microsoft Graph.",
+    "Mail sent successfully": "E-post skickades framgångsrikt",
+    "SOAP connection with Smartschool failed.": "SOAP-anslutning med Smartschool misslyckades.",
+    "Test user information is incomplete. Please configure it using setTestUser().": "Testanvändarinformationen är ofullständig. Konfigurera den med setTestUser().",
+    "To view the message, please use an HTML compatible email viewer!": "För att visa meddelandet, använd en HTML-kompatibel e-postvisare!"
+  }
+}

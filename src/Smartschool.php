@@ -14,7 +14,7 @@ use Psr\Log\LoggerInterface;
  * @author       Rudy Mas <rudy.mas@rudymas.be>
  * @copyright    2025, Rudy Mas (http://rudymas.be/)
  * @license      https://opensource.org/licenses/GPL-3.0 GNU General Public License, version 3 (GPL-3.0)
- * @version      2025.05.13.5
+ * @version      2025.09.10.0
  * @package      Tigress
  */
 class Smartschool
@@ -47,6 +47,8 @@ class Smartschool
      */
     public function __construct(string $platform, ?string $passwordWebServices = null, ?LoggerInterface $logger = null)
     {
+        TRANSLATIONS->load(SYSTEM_ROOT . '/vendor/tigress/communication/translations/translations.json');
+
         $this->logger = $logger;
         if ($passwordWebServices !== null) {
             $this->passwordWebServices = $passwordWebServices;
@@ -76,7 +78,7 @@ class Smartschool
         try {
             $this->soap = new SoapClient('https://' . $platform . '/Webservices/V3?wsdl', $soapClientOptions);
         } catch (SoapFault $e) {
-            $this->logger?->error('SOAP-verbinding met Smartschool mislukt.', [
+            $this->logger?->error(__('SOAP connection with Smartschool failed.'), [
                 'platform' => $platform,
                 'message' => $e->getMessage(),
                 'exception' => $e
@@ -108,8 +110,12 @@ class Smartschool
         ?array $attachments = null,
         ?string $redirectByError = '/',
         bool $debug = false,
-        string $errorMsg = 'An error occurred while sending the message. However, the action was still completed.'
+        string $errorMsg = ''
     ): void {
+        if (empty($errorMsg)) {
+            $errorMsg = __('An error occurred while sending the message. However, the action was still completed.');
+        }
+
         if ($debug) {
             $this->sendTestMail($subject, $body, $attachments, $redirectByError);
         } else {
@@ -173,8 +179,8 @@ class Smartschool
                 throw new Exception($errorMessage);
             }
 
-            $this->sendmailLogging($recipient, $subject, $coAccount, 'Mail sent successfully');
-            $this->logger?->info('Mail sent successfully', [
+            $this->sendmailLogging($recipient, $subject, $coAccount, __('Mail sent successfully'));
+            $this->logger?->info(__('Mail sent successfully'), [
                 'recipient' => $recipient,
                 'subject' => $subject,
                 'coAccount' => $coAccount
@@ -211,7 +217,7 @@ class Smartschool
             empty($this->testUser['webservicespwd']) ||
             empty($this->testUser['username'])
         ) {
-            throw new Exception('Test user information is incomplete. Please configure it using setTestUser().');
+            throw new Exception(__('Test user information is incomplete. Please configure it using setTestUser().'));
         }
 
         $testSmartSchool = new Smartschool($this->testUser['platform'], $this->testUser['webservicespwd'], $this->logger);

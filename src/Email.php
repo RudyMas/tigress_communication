@@ -11,7 +11,7 @@ use PHPMailer\PHPMailer\PHPMailer;
  * @author       Rudy Mas <rudy.mas@rudymas.be>
  * @copyright    2024-2025, Rudy Mas (http://rudymas.be/)
  * @license      https://opensource.org/licenses/GPL-3.0 GNU General Public License, version 3 (GPL-3.0)
- * @version      2025.06.13.1
+ * @version      2025.09.10.0
  * @package      Tigress
  */
 class Email
@@ -25,13 +25,15 @@ class Email
      */
     public static function version(): string
     {
-        return '2025.06.13';
+        return '2025.09.10';
     }
 
     public function __construct($exceptions = null)
     {
+        TRANSLATIONS->load(SYSTEM_ROOT . '/vendor/tigress/communication/translations/translations.json');
+
         $this->mail = new PHPMailer($exceptions);
-        $this->mail->AltBody = 'To view the message, please use an HTML compatible email viewer!';
+        $this->mail->AltBody = __('To view the message, please use an HTML compatible email viewer!');
     }
 
     /**
@@ -106,7 +108,7 @@ class Email
         string $subject,
         string $body,
         bool   $test = false,
-        array  $testTo = ['email' => 'rudy.mas@rudymas.be', 'name' => 'Rudy Mas'],
+        array  $testTo = ['email' => 'rudy.mas@rmsoft.be', 'name' => 'Rudy Mas'],
         bool   $isHtml = true,
         array  $cc = [],
         array  $bcc = []
@@ -114,7 +116,7 @@ class Email
     {
         $this->mail->isHTML($isHtml);
         $this->mail->CharSet = 'UTF-8';
-        $this->mail->setFrom($from['email'], $from['name'] ?? 'Tigress Mailer');
+        $this->mail->setFrom($from['email'], $from['name'] ?? 'Tigress Mailing System');
 
         if ($test) {
             $this->mail->addAddress($testTo['email'], $testTo['name'] ?? $testTo['email']);
@@ -188,6 +190,7 @@ class Email
      * - sequence: Sequence number for the event (used for updates)
      * - dtstart: Start date and time of the event in 'YYYYMMDDTHHMMSS' format
      * - dtend: End date and time of the event in 'YYYYMMDDTHHMMSS' format
+     * - timezone: Timezone of the event (e.g., 'Europe/Brussels')
      * - summary: Summary or title of the event
      * - location: Location of the event
      * - description: Description of the event
@@ -212,6 +215,7 @@ class Email
             'dtstamp' => gmdate('Ymd\THis\Z'),
             'dtstart' => gmdate('Ymd\THis', strtotime('+1 hour')),
             'dtend' => gmdate('Ymd\THis', strtotime('+2 hour')),
+            'timezone' => 'Europe/Brussels',
             'summary' => 'Event',
             'location' => '',
             'description' => '',
@@ -238,8 +242,8 @@ BEGIN:VEVENT
 UID:{$icsData['uid']}
 SEQUENCE:{$icsData['sequence']}
 DTSTAMP:{$icsData['dtstamp']}
-DTSTART;TZID=Europe/Brussels:{$icsData['dtstart']}
-DTEND;TZID=Europe/Brussels:{$icsData['dtend']}
+DTSTART;TZID={$icsData['timezone']}:{$icsData['dtstart']}
+DTEND;TZID={$icsData['timezone']}:{$icsData['dtend']}
 SUMMARY:{$icsData['summary']}
 LOCATION:{$icsData['location']}
 DESCRIPTION:{$icsData['description']}
