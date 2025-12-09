@@ -6,12 +6,12 @@ use PHPMailer\PHPMailer\Exception;
 use PHPMailer\PHPMailer\PHPMailer;
 
 /**
- * Class Email (PHP version 8.4)
+ * Class Email (PHP version 8.5)
  *
  * @author       Rudy Mas <rudy.mas@rudymas.be>
  * @copyright    2024-2025, Rudy Mas (http://rudymas.be/)
  * @license      https://opensource.org/licenses/GPL-3.0 GNU General Public License, version 3 (GPL-3.0)
- * @version      2025.09.10.0
+ * @version      2025.12.09.0
  * @package      Tigress
  */
 class Email
@@ -25,7 +25,7 @@ class Email
      */
     public static function version(): string
     {
-        return '2025.09.10';
+        return '2025.12.09';
     }
 
     public function __construct($exceptions = null)

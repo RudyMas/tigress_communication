@@ -9,12 +9,12 @@ use SoapFault;
 use Psr\Log\LoggerInterface;
 
 /**
- * Class Smartschool (PHP version 8.4)
+ * Class Smartschool (PHP version 8.5)
  *
  * @author       Rudy Mas <rudy.mas@rudymas.be>
  * @copyright    2025, Rudy Mas (http://rudymas.be/)
  * @license      https://opensource.org/licenses/GPL-3.0 GNU General Public License, version 3 (GPL-3.0)
- * @version      2025.09.10.0
+ * @version      2025.12.09.0
  * @package      Tigress
  */
 class Smartschool
@@ -36,7 +36,7 @@ class Smartschool
      */
     public static function version(): string
     {
-        return '2025.05.13';
+        return '2025.12.09';
     }
 
     /**
