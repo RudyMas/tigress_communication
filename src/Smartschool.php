@@ -7,6 +7,7 @@ use Repository\SystemSendmailLogsRepo;
 use SoapClient;
 use SoapFault;
 use Psr\Log\LoggerInterface;
+use Throwable;
 
 /**
  * Class Smartschool (PHP version 8.5)
@@ -14,7 +15,7 @@ use Psr\Log\LoggerInterface;
  * @author       Rudy Mas <rudy.mas@rudymas.be>
  * @copyright    2025, Rudy Mas (http://rudymas.be/)
  * @license      https://opensource.org/licenses/GPL-3.0 GNU General Public License, version 3 (GPL-3.0)
- * @version      2025.12.09.0
+ * @version      2026.03.20.0
  * @package      Tigress
  */
 class Smartschool
@@ -36,7 +37,7 @@ class Smartschool
      */
     public static function version(): string
     {
-        return '2025.12.09';
+        return '2026.03.20';
     }
 
     /**
@@ -131,6 +132,7 @@ class Smartschool
      * @param int $nrCoAccount
      * @param string $errorMessage
      * @return void
+     * @throws Throwable
      */
     private function sendmailLogging(string $recipient, string $subject, int $nrCoAccount, string $errorMessage): void
     {
@@ -142,6 +144,7 @@ class Smartschool
         $systemSendmailLog->nr_co_account = $nrCoAccount;
         $systemSendmailLog->pwd_web_services = $this->passwordWebServices;
         $systemSendmailLog->error_message = $errorMessage;
+        $systemSendmailLog->send_on = date('Y-m-d H:i:s');
         $systemSendmailLogs->save($systemSendmailLog);
     }
 
